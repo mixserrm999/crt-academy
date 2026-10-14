@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRT Academy — เรียนรู้ Candle Range Theory</title>
+  <meta name="description" content="เรียนรู้ระบบเทรด CRT (Candle Range Theory) พร้อมตัวอย่างกราฟแท่งเทียน เครื่องมือตรวจ Setup แบบฝึกหัด และสมุดบันทึกวัดความแม่นยำ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="brand">CRT<span>Academy</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">☰</button>
+    <nav id="navLinks">
+      <a href="#lessons">บทเรียน</a>
+      <a href="#patterns">รูปแบบ CRT</a>
+      <a href="#entry">โมเดลเข้าเทรด</a>
+      <a href="#checker">ตัวตรวจ CRT</a>
+      <a href="#practice">ฝึกดูกราฟ</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#quiz">แบบทดสอบ</a>
+      <a href="#journal">บันทึกผล</a>
+    </nav>
+  </div>
+  <div class="read-progress"><div id="readProgress"></div></div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">คู่มือเรียนรู้ฟรี • Price Action • ICT Concepts</span>
+        <h1>เข้าใจ <span class="grad">Candle Range Theory</span> อย่างเป็นระบบ</h1>
+        <p class="lead">เรียนตั้งแต่หลักพื้นฐาน “ทุกแท่งเทียนคือกรอบราคา” ไปจนถึงโมเดลเข้าเทรดบน Timeframe เล็ก พร้อมกราฟตัวอย่างที่วาดจากราคาจริง เครื่องมือตรวจ Setup แบบฝึกหัด และสมุดบันทึกวัดความแม่นยำของคุณเอง</p>
+        <div class="hero-cta">
+          <a class="btn" href="#lessons">เริ่มเรียน</a>
+          <a class="btn ghost" href="#practice">ลองฝึกดูกราฟ</a>
+        </div>
+        <div class="stats">
+          <div><b>8</b><span>บทเรียน</span></div>
+          <div><b>8</b><span>รูปแบบกราฟ</span></div>
+          <div><b>∞</b><span>โจทย์ฝึกสุ่ม</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div id="heroChart"></div>
+        <p class="caption">Bullish CRT: C2 กวาด Low ของ C1 → ปิดกลับในกรอบ → C3 วิ่งไปหา High ของ C1</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSONS -->
+  <section id="lessons">
+    <div class="container">
+      <h2>บทเรียน</h2>
+      <p class="sub">เรียงจากพื้นฐานไปขั้นสูง กด “ทำเครื่องหมายว่าเรียนแล้ว” เพื่อบันทึกความคืบหน้า (เก็บไว้ในเบราว์เซอร์ของคุณ)</p>
+      <div class="lesson-progress">
+        <div class="bar"><div id="lessonBar"></div></div>
+        <span id="lessonCount">0/8</span>
+      </div>
+      <div class="lesson-layout">
+        <aside id="lessonNav" class="lesson-nav"></aside>
+        <article id="lessonBody" class="card lesson-body"></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATTERNS -->
+  <section id="patterns">
+    <div class="container">
+      <h2>คลังรูปแบบ CRT</h2>
+      <p class="sub">ทุกกราฟวาดจากค่า OHLC จริง เส้นระดับราคาทุกเส้นจึงตรงกับตัวเลข ใช้เทียบกับกราฟจริงของคุณได้</p>
+      <div id="patternGrid" class="grid-2"></div>
+    </div>
+  </section>
+
+  <!-- ENTRY MODEL -->
+  <section id="entry">
+    <div class="container">
+      <h2>โมเดลเข้าเทรดบน LTF</h2>
+      <p class="sub">ตัวอย่าง: CRT บน H4 แล้วลงไปหาจุดเข้าบน M15 (ภาพนี้คือราคาภายในช่วงแท่ง C2 และ C3)</p>
+      <div class="grid-2">
+        <div class="card">
+          <div id="entryChart"></div>
+          <p class="caption">Sweep → MSS (Displacement) → FVG → Entry → Target ที่ High ของ C1</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">ขั้นตอน</h3>
+          <ol>
+            <li><b>ระบุกรอบ C1 บน H4</b> — High 112 / Low 100 / 50% = 106</li>
+            <li><b>รอ Sweep:</b> ราคาลงไปทำ Low ที่ 96 ใต้ Low ของ C1 (กวาด Sell-side Liquidity)</li>
+            <li><b>รอ MSS:</b> แท่ง Displacement ปิดเหนือ Swing High ล่าสุด (101.8)</li>
+            <li><b>Mark FVG:</b> ช่องว่างที่เกิดจาก Displacement (100.5 – 101.2)</li>
+            <li><b>Entry:</b> Limit ที่ขอบบน FVG 101.2 &nbsp;|&nbsp; <b>SL:</b> 95.8 ใต้ Sweep Low</li>
+            <li><b>TP1:</b> 106 (50%) &nbsp;|&nbsp; <b>TP2:</b> 112 (High ของ C1)</li>
+          </ol>
+          <div class="note"><b>RR:</b> (112 − 101.2) ÷ (101.2 − 95.8) = 10.8 ÷ 5.4 = <b>1 : 2</b><br>เทียบกับเข้าที่ราคาปิดของ C2 บน H4 (102, SL 95.5) จะได้เพียง ≈ 1 : 1.54</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKER -->
+  <section id="checker">
+    <div class="container">
+      <h2>ตัวตรวจ CRT (CRT Checker)</h2>
+      <p class="sub">กรอก OHLC ของแท่ง C1 และ C2 จากกราฟจริง เว็บจะตรวจตามกฎ CRT แล้วคำนวณ SL / TP / RR ให้</p>
+      <div class="grid-2">
+        <form id="checkerForm" class="card" novalidate>
+          <div class="fieldset-title">แท่ง C1 (Range Candle)</div>
+          <div class="form-grid">
+            <div><label for="c1o">Open</label><input id="c1o" type="number" step="any" value="110"></div>
+            <div><label for="c1h">High</label><input id="c1h" type="number" step="any" value="112"></div>
+            <div><label for="c1l">Low</label><input id="c1l" type="number" step="any" value="100"></div>
+            <div><label for="c1c">Close</label><input id="c1c" type="number" step="any" value="103"></div>
+          </div>
+          <div class="fieldset-title" style="margin-top:14px">แท่ง C2 (Manipulation Candle)</div>
+          <div class="form-grid">
+            <div><label for="c2o">Open</label><input id="c2o" type="number" step="any" value="103"></div>
+            <div><label for="c2h">High</label><input id="c2h" type="number" step="any" value="105"></div>
+            <div><label for="c2l">Low</label><input id="c2l" type="number" step="any" value="96"></div>
+            <div><label for="c2c">Close</label><input id="c2c" type="number" step="any" value="102"></div>
+          </div>
+          <div class="hero-cta" style="margin-top:16px">
+            <button class="btn" type="submit">ตรวจสอบ</button>
+            <button class="btn ghost" type="button" id="fillBull">ตัวอย่าง Bullish</button>
+            <button class="btn ghost" type="button" id="fillBear">ตัวอย่าง Bearish</button>
+          </div>
+          <p class="muted small" style="margin-top:12px">* Entry ในเครื่องมือนี้ใช้ “ราคาปิด C2” เป็นค่าอ้างอิง ส่วน SL วางที่ปลายไส้ C2 พอดี ในการเทรดจริงควรเผื่อ Spread และหาจุดเข้าที่ดีกว่าใน LTF</p>
+        </form>
+        <div class="card"><div id="checkResult"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="practice">
+    <div class="container">
+      <h2>ฝึกแยกรูปแบบ CRT</h2>
+      <p class="sub">โจทย์สุ่มใหม่ทุกครั้ง ดูแท่ง C2 แล้วตอบว่าเป็น Bullish CRT, Bearish CRT หรือไม่ใช่ CRT</p>
+      <div class="card">
+        <div class="scoreboard">
+          <span>คะแนน: <b id="simScore">0/0</b></span>
+          <span>ความแม่นยำ: <b id="simAcc">–</b></span>
+          <span>ถูกติดกัน: <b id="simStreak">0</b></span>
+          <span>สถิติสูงสุด: <b id="simBest">0</b></span>
+        </div>
+        <div id="simChart" style="margin-top:12px"></div>
+        <div class="sim-actions">
+          <button class="btn ghost sim-btn" data-a="bull">Bullish CRT</button>
+          <button class="btn ghost sim-btn" data-a="bear">Bearish CRT</button>
+          <button class="btn ghost sim-btn" data-a="none">ไม่ใช่ CRT / ยังไม่มี Setup</button>
+          <button class="btn" id="simNext" hidden>โจทย์ถัดไป →</button>
+        </div>
+        <div id="simFeedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section id="checklist">
+    <div class="container">
+      <h2>Checklist ก่อนเข้าเทรด</h2>
+      <p class="sub">ติ๊กให้ครบก่อนกดออเดอร์ ข้อที่มีป้าย “บังคับ” ถ้าขาดไปถือว่าไม่ใช่ CRT</p>
+      <div class="grid-2">
+        <div class="card" id="checkList"></div>
+        <div class="card">
+          <div id="checkScore"></div>
+          <button class="btn ghost sm" id="checkReset" style="margin-top:12px">รีเซ็ต Checklist</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="container">
+      <h2>แบบทดสอบความเข้าใจ</h2>
+      <p class="sub">เลือกคำตอบแล้วจะเห็นเฉลยพร้อมเหตุผลทันที</p>
+      <div id="quizBox" class="quiz-list"></div>
+      <div class="card" id="quizResult" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section id="journal">
+    <div class="container">
+      <h2>บันทึกผล & วัดความแม่นยำ</h2>
+      <p class="sub">บันทึกผล Backtest หรือเทรดจริงเป็นหน่วย R (เช่น ชนะ 2R = 2, แพ้ = -1, เสมอทุน = 0) ข้อมูลเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</p>
+      <form id="journalForm" class="card">
+        <div class="form-grid j-grid">
+          <div><label for="jDate">วันที่</label><input id="jDate" type="date" required></div>
+          <div><label for="jPair">สินทรัพย์</label><input id="jPair" type="text" placeholder="XAUUSD" required maxlength="20"></div>
+          <div><label for="jTf">Timeframe</label>
+            <select id="jTf"><option>H4 → M15</option><option>H4 → M5</option><option>Daily → H1</option><option>H1 → M5</option><option>Weekly → H4</option><option>อื่นๆ</option></select></div>
+          <div><label for="jDir">ทิศทาง</label>
+            <select id="jDir"><option>Bullish</option><option>Bearish</option></select></div>
+          <div><label for="jGrade">เกรด Setup</label>
+            <select id="jGrade"><option value="A">A (ครบทุกข้อ)</option><option value="B">B (ขาด 1–2 ข้อ)</option><option value="C">C (ฝืน)</option></select></div>
+          <div><label for="jR">ผลลัพธ์ (R)</label><input id="jR" type="number" step="0.1" placeholder="2 หรือ -1" required></div>
+          <div class="span-2"><label for="jNote">หมายเหตุ</label><input id="jNote" type="text" maxlength="120" placeholder="เช่น Sweep ที่ PDL + FVG M15"></div>
+        </div>
+        <div class="hero-cta" style="margin-top:14px">
+          <button class="btn" type="submit">+ เพิ่มรายการ</button>
+          <button class="btn ghost" type="button" id="jExport">ดาวน์โหลด CSV</button>
+          <button class="btn danger" type="button" id="jClear">ลบทั้งหมด</button>
+        </div>
+      </form>
+      <div id="journalStats"></div>
+      <div class="card table-wrap" id="journalTable"></div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section id="glossary">
+    <div class="container">
+      <h2>คำศัพท์</h2>
+      <p class="sub">ศัพท์ที่เจอบ่อยในสาย CRT / ICT</p>
+      <div class="gloss" id="glossBox"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p><b>คำเตือน:</b> เนื้อหาทั้งหมดมีไว้เพื่อการศึกษา ไม่ใช่คำแนะนำการลงทุน การเทรด Forex, CFD, ทองคำ และคริปโตมีความเสี่ยงสูง คุณอาจสูญเสียเงินทุนทั้งหมด ไม่มีระบบใดชนะได้ 100% ควรบริหารความเสี่ยงและทดสอบกับบัญชีทดลองก่อนเสมอ</p>
+    <p>© CRT Academy — Static Web App สำหรับ GitHub Pages</p>
+  </div>
+</footer>
+</body>
+</html>
